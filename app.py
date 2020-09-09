@@ -12,14 +12,11 @@ def word_list():
         return words.split("\n")
 
 ###  all global variable and arrays
-# img_lst = sorted(os.listdir("./images"))
-# print (img_lst)
-# print (img_lst)
 idx_img = 0
 words = word_list()
 random.shuffle(words)
 word = words[0].lower()
-print (word)
+# print (word)
 left_life = 6
 list_of_word = [i for i in word]
 r = ["_"]*len(word)
@@ -28,19 +25,20 @@ guess_start = ' '.join(r)
 #####fucn
 
 def play(guess):
-    print (guess)
+    # print (guess)
     global word, left_life, guess_start, r, list_of_word, idx_img
     p = guess.lower()
     if guess.lower() in word:
-        a = []
-        for i in range(0,word.count(p)):
-            y = list_of_word.index(p)
-            a.append(y)
-            list_of_word.pop(y)                       
-            list_of_word.insert(y,"0")
-        for i in a:
-            r.pop(i)
-            r.insert(i,p)
+        if  guess.lower() in list_of_word:
+            a = []
+            for i in range(0,word.count(p)):
+                y = list_of_word.index(p)
+                a.append(y)
+                list_of_word.pop(y)                       
+                list_of_word.insert(y,"0")
+            for i in a:
+                r.pop(i)
+                r.insert(i,p)
         o = " ".join(r)
         guess_word.config(text=o)
         if word == "".join(r):
@@ -85,8 +83,7 @@ def play(guess):
             else:
                 quit()
 
-# random.shuffle(words)
-# word = words[0]
+
 main_frame = tkinter.Tk()
 main_frame.geometry("740x560")
 main_frame.resizable(False, False)
@@ -133,9 +130,7 @@ for i in [j for j in  "YZ"]:
     tkinter.Button(main_frame,font="arial 15 bold",bg="orange", text=i,command=lambda i=i: play(i)).place(x=x1,y=460)
     x1 += 50
 
-##### image throwing
-# print (img_lst)
-# photo = tkinter.PhotoImage(file=f"./images/{img_lst[idx_img]}")
+###images
 throwing_image = tkinter.Label(main_frame, bg="light green")
 throwing_image.place(x=510, y=280)
 
